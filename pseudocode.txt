@@ -1,0 +1,73 @@
+
+On landing page (notes.html):
+--------
+When "Get started" is clicked
+Take user to notes.html
+
+On notes page (notes.html):
+---------
+In left column: List existing notes
+In right column: Show empty fields to enter a new note title and the note’s text
+
+When new note title, and text is entered 
+Show Save icon in the navigation at the top of the page
+
+When Save icon is clicked
+Save the new note that was entered
+Show that new saved note in left column
+
+When a note on the left column is clicked
+Display that note's title and text on the right column
+
+When Write icon is clicked
+In right column, clear fields so a new note can be entered
+
+=====================================================
+
+On any page
+--------
+When root url is entered in address bar
+- Send GET req for *
+- Send file for public/index.html
+
+On landing page (index.html):
+--------
+When "Get started" is clicked
+- Send GET req for /notes
+- Send file for public/notes.html
+
+On notes page (notes.html):
+---------
+In left column: List existing notes
+- Receive GET req
+- Get the array of notes 
+- Send array back as JSON obj
+In right column: Show empty fields to enter a new note title and the note’s text
+- Already done
+
+When new note title, and text is entered 
+Show Save icon in the navigation at the top of the page
+- Already done
+
+When Save icon is clicked
+- (Already done) Create new note iD no?
+- (Already done) Assemble JSON object with note title, content (and ID no?)
+- Receive POST req with JSON object
+- Perform validation?
+Save the new note that was entered
+- Parse the request object
+- Push object to the array of notes
+- Write the new array to db.json
+Show that new saved note in left column
+- Receive GET req
+- Get the array of notes 
+- Send array back as JSON obj
+
+When a note on the left column is clicked
+- Send GET req with title of note as query parameter
+Display that note's title and text on the right column
+- Send JSON response with title of note and its content
+
+When Write icon is clicked
+In right column, clear fields so a new note can be entered
+- Already done
