@@ -44,6 +44,11 @@ app.post('/api/notes', (req, res) => {
     // req.body is where our incoming content will be
     // data received is processed by middleware (see further up code) before it's processed as req.body
     console.log(req.body);
+
+    // Set ID of note
+    const noteID = Date.now();
+    req.body.id = noteID;
+
     createNewNote(req.body);
     res.json(req.body);
 
