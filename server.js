@@ -8,29 +8,25 @@ const app = express();
 const notes = require('./db/db');
 
 // Express Middleware
-app.use(express.urlencoded({ extended: true })); //"{extended: true}" tells that there may be arrays nested in the data
-// parse incoming JSON data
+app.use(express.urlencoded({ extended: true })); 
+// Parse incoming JSON data
 app.use(express.json());
 
 // Needed to ensure that static files (i.e: stylesheets) are loaded from the correct folder
 app.use(express.static('public'));
 
-
 function createNewNote(body) { 
-    console.log(body);
 
     const note = body;
     notes.push(note);
 
     // Writes the new note to the JSON file
     fs.writeFileSync(
-        // _dirname represents the dire of the file we execute the code in
         path.join(__dirname, './db/db.json'),
-        //
         JSON.stringify(notes, null, 2)
     );
   
-    // return finished code to post route for response
+    // Return the finished code to POST route for response
     return note;
 }
 
@@ -41,11 +37,8 @@ app.get('/api/notes', (req, res) => {
 
 // Process POST request
 app.post('/api/notes', (req, res) => {
-    // req.body is where our incoming content will be
-    // data received is processed by middleware (see further up code) before it's processed as req.body
-    console.log(req.body);
 
-    // Set ID of note
+    // Set the ID of note (Uses the time that the note was generated to maket the ID)
     const noteID = Date.now();
     req.body.id = noteID;
 
